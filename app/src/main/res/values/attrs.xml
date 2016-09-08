@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScratchView">
+        <attr name="maskColor" format="color"/>
+        <attr name="eraseWidth" format="dimension"/>
+        <attr name="waterMark" format="reference"/>
+        <attr name="maxPrecent" format="integer"/>
+    </declare-styleable>
+</resources>

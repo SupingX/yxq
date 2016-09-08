@@ -1,0 +1,52 @@
+// 针对每个moudle 的配置，如果这里的定义的选项和顶层build.gradle定义的相同，后者会被覆盖。
+
+apply plugin: 'com.android.application' //应用了Android 程序的gradle插件，作为Android 的应用程序，这一步是必须的，因为plugin中提供了Android 编译、测试、打包等等的所有task。
+// 如果我们要写一个library项目让其他的项目引用，我们的bubild.gradle的plugin 就不能是andrid plugin了，需要引用如下plugin
+// apply plugin: 'com.android.library'
+// 引用在setting.gradle 里面 include
+
+android { // 这是编译文件中最大的代码块，关于android 的所有特殊配置都在这里，这就是又我们前面的声明的 plugin 提供的。
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
+    defaultConfig { // 就是程序的默认配置，注意，如果在AndroidMainfest.xml里面定义了与这里相同的属性，会以这里的为主。
+        applicationId "com.laputa.yxq" // 在我们曾经定义的AndroidManifest.xml中，那里定义的包名有两个用途：一个是作为程序的唯一识别ID,防止在同一手机装两个一样的程序；另一个就是作为我们R资源类的包名。在以前我们修改这个ID会导致所有用引用R资源类的地方都要修改。但是现在我们如果修改applicationId只会修改当前程序的ID,而不会去修改源码中资源文件的引用
+        minSdkVersion 18
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+
+
+    }
+    buildTypes { // 定义了编译类型，针对每个类型我们可以有不同的编译配置，不同的编译配置对应的有不同的编译命令。默认的有debug、release 的类型。
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    // 是属于gradle 的依赖配置。它定义了当前项目需要依赖的其他库。
+    // 文件依赖
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile files('libs/lite-ble-0.9.2.jar')
+    // 通过files()方法可以添加文件依赖，如果有很多jar文件，我们也可以通过fileTree()方法添加一个文件夹，除此之外，我们还可以通过通配符的方式添加
+    testCompile 'junit:junit:4.12'
+    // 我们在引用库的时候，每个库名称包含三个元素：组名:库名称:版本号,如下：
+    compile 'com.android.support:appcompat-v7:24.2.0'
+    // 如果我们要保证我们依赖的库始终处于最新状态，我们可以通过添加通配符的方式
+    // compile 'com.android.support:appcompat-v7:+'
+    // 但是我们一般不要这么做，这样做除了每次编译都要去做网络请求查看是否有新版本导致编译过慢外，最大的弊病在于我们使用过的版本很很困难是测试版，性能得不到保证，所以，在我们引用库的时候一定要指名依赖版本。
+    // 配置本地.so库文件
+    // android {
+    //      sourceSets.main {
+    //          jniLibs.srcDir 'src/main/libs'
+    //      }
+    // }
+
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+
+}
