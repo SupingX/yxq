@@ -1,4 +1,4 @@
-package view;
+package com.laputa.yxq.view;
 
 import android.annotation.TargetApi;
 import android.content.Context;

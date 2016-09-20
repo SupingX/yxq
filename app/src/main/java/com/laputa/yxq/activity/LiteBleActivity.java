@@ -1,4 +1,4 @@
-package com.laputa.yxq;
+package com.laputa.yxq.activity;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
@@ -13,6 +13,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.laputa.yxq.R;
 import com.litesuits.bluetooth.LiteBleGattCallback;
 import com.litesuits.bluetooth.LiteBluetooth;
 import com.litesuits.bluetooth.exception.BleException;

@@ -1,4 +1,4 @@
-package com.laputa.yxq;
+package com.laputa.yxq.activity;
 
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +9,8 @@ import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.laputa.yxq.R;
 
 import view.ScratchView;
 
